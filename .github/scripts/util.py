@@ -79,7 +79,7 @@ def filterListings(listings, earliest_date):
     return final_listings
 
 def getListingsFromJSON(filename=".github/scripts/listings.json"):
-    with open(filename) as f:
+    with open(filename, "r", encoding="utf-8") as f:
         listings = json.load(f)
         print("Recieved " + str(len(listings)) +
               " listings from listings.json")
@@ -95,7 +95,7 @@ def embedTable(listings):
         filepath = "Canada.md"
         newText = ""
         readingTable = False
-        with open(filepath, "r") as f:
+        with open(filepath, "r", encoding="utf-8") as f:
             for line in f.readlines():
                 if readingTable:
                     if "|" not in line and "TABLE_END" in line:
@@ -107,14 +107,14 @@ def embedTable(listings):
                     if "TABLE_START" in line:
                         readingTable = True
                         newText += "\n" + create_md_table(canada_listings) + "\n"
-        with open(filepath, "w") as f:
+        with open(filepath, "w", encoding="utf-8") as f:
             f.write(newText)
 
     # Write to README.md
     filepath = "README.md"
     newText = ""
     readingTable = False
-    with open(filepath, "r") as f:
+    with open(filepath, "r", encoding="utf-8") as f:
         for line in f.readlines():
             if readingTable:
                 if "|" not in line and "TABLE_END" in line:
@@ -126,7 +126,7 @@ def embedTable(listings):
                 if "TABLE_START" in line:
                     readingTable = True
                     newText += "\n" + create_md_table(other_listings) + "\n"
-    with open(filepath, "w") as f:
+    with open(filepath, "w", encoding="utf-8") as f:
         f.write(newText)
 
 def sortListings(listings):
